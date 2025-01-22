@@ -5,6 +5,6 @@ class RunnerTest {
     @Karate.Test
     Karate testUsers() {
         //turn Karate.run("classpath:features").relativeTo(getClass());
-        return Karate.run().tags("@deleteTest").relativeTo(getClass());
+        return Karate.run().tags("@getTest").relativeTo(getClass());
     }
 }

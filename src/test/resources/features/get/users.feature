@@ -6,8 +6,10 @@ Feature: Example of Karate testing get
 
   @getTest
   Scenario: Get user details
+    * def jsonResponse = read('../json/listaUsuario.json')
     Given path 'posts/1/comments'
     When method get
     Then status 200
     And match response[1].id == 2
     And match response[0].email == 'Eliseo@gardner.biz'
+    And  match $ == jsonResponse
