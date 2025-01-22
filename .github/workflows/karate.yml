@@ -27,7 +27,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Run Karate tests
-        run: mvn test -Dkarate.options="--tags @apiWeb --report"
+        run: mvn test -Dkarate.options="--tags @apiWeb"
 
       - name: Upload Karate test reports
         uses: actions/upload-artifact@v3
