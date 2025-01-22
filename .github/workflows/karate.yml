@@ -1,0 +1,35 @@
+name: Karate Test Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test-karate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adoptopenjdk'
+
+      - name: Install dependencies with Maven
+        run: mvn install -DskipTests=true
+
+      - name: Clean project
+        run: mvn clean
+
+      - name: Run Karate tests
+        run: mvn test -Dkarate.options="--tags @apiWeb"
+
+      - name: Upload Karate test reports
+        uses: actions/upload-artifact@v3
+        with:
+            name: karate-reports
+            path: target/karate-reports
